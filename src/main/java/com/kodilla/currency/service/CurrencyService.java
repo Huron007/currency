@@ -24,9 +24,7 @@ public class CurrencyService {
     public Currency getCurrency(final Long currencyId) throws CurrencyNotFoundException {
         if(currencyRepository.existsById(currencyId)){
             return currencyRepository.findById(currencyId).get();
-        } else {
-            throw new CurrencyNotFoundException();
-        }
+        } else throw new CurrencyNotFoundException();
     }
 
     public Currency saveCurrency(final Currency currency) throws DuplicateCurrencyException {
@@ -45,9 +43,7 @@ public class CurrencyService {
     public Currency updateCurrency(final Currency currency) throws CurrencyNotFoundException{
         if(currencyRepository.existsById(currency.getId())){
             return currencyRepository.save(currency);
-        } else {
-            throw new CurrencyNotFoundException();
-        }
+        } else throw new CurrencyNotFoundException();
     }
 
     public List<Currency> updateCurrencyList(final List<Currency> currencyList) throws CurrencyNotFoundException{
@@ -55,16 +51,12 @@ public class CurrencyService {
             return currencyList.stream()
                     .map(currencyRepository::save)
                     .collect(Collectors.toList());
-        } else {
-            throw new CurrencyNotFoundException();
-        }
+        } else throw new CurrencyNotFoundException();
     }
 
     public void deleteCurrency(final Long currencyId) throws CurrencyNotFoundException {
         if(currencyRepository.existsById(currencyId)){
             currencyRepository.deleteById(currencyId);
-        } else {
-            throw new CurrencyNotFoundException();
-        }
+        } else throw new CurrencyNotFoundException();
     }
 }

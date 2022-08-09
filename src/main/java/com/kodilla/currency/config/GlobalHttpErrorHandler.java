@@ -1,5 +1,6 @@
 package com.kodilla.currency.config;
 
+import com.kodilla.currency.exception.AlertNotFoundException;
 import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCurrencyException;
 import org.springframework.http.HttpStatus;
@@ -19,5 +20,10 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> handleDuplicateCurrencyException(DuplicateCurrencyException exception){
         return new ResponseEntity<>("Currency with given code and effective date already exist in database.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleAlertNotFoundException(AlertNotFoundException exception){
+        return new ResponseEntity<>("Alert with given id does not exist." , HttpStatus.BAD_REQUEST);
     }
 }
