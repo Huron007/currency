@@ -3,6 +3,7 @@ package com.kodilla.currency.config;
 import com.kodilla.currency.exception.AlertNotFoundException;
 import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCurrencyException;
+import com.kodilla.currency.exception.FavoriteNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +15,7 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handleCurrencyNotFoundException(CurrencyNotFoundException exception){
-        return new ResponseEntity<>("Currency with given id does not exist.", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Currency with given id does not exist.", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
@@ -24,6 +25,11 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> handleAlertNotFoundException(AlertNotFoundException exception){
-        return new ResponseEntity<>("Alert with given id does not exist." , HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Alert with given id does not exist." , HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleFavoriteNotFoundException(FavoriteNotFoundException exception){
+        return new ResponseEntity<>("Favorite with given id does not exist.", HttpStatus.NOT_FOUND);
     }
 }

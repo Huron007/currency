@@ -23,7 +23,9 @@ public class CurrencyService {
 
     public Currency getCurrency(final Long currencyId) throws CurrencyNotFoundException {
         if(currencyRepository.existsById(currencyId)){
-            return currencyRepository.findById(currencyId).get();
+            if(currencyRepository.findById(currencyId).isPresent()){
+                return currencyRepository.findById(currencyId).get();
+            } else throw new CurrencyNotFoundException();
         } else throw new CurrencyNotFoundException();
     }
 
@@ -47,7 +49,7 @@ public class CurrencyService {
     }
 
     public List<Currency> updateCurrencyList(final List<Currency> currencyList) throws CurrencyNotFoundException{
-        if(currencyList.stream().map(e -> currencyRepository.findById(e.getId())).count() == currencyList.size()){
+        if(currencyList.stream().map(e -> currencyRepository.findById(e.getId()).isPresent()).count() == currencyList.size()){
             return currencyList.stream()
                     .map(currencyRepository::save)
                     .collect(Collectors.toList());

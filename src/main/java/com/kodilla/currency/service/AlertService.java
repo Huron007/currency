@@ -44,7 +44,7 @@ public class AlertService {
     }
 
     public List<Alert> updateAlertList(final List<Alert> alerts) throws AlertNotFoundException {
-        if(alerts.stream().map(e -> alertRepository.existsById(e.getId())).count() == alerts.size()){
+        if(alerts.stream().map(e -> alertRepository.findById(e.getId()).isPresent()).count() == alerts.size()){
             return alerts.stream()
                     .map(alertRepository::save)
                     .collect(Collectors.toList());
