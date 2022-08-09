@@ -1,6 +1,7 @@
 package com.kodilla.currency.facade;
 
 import com.kodilla.currency.dto.FavoriteDto;
+import com.kodilla.currency.exception.DuplicateFavoriteException;
 import com.kodilla.currency.exception.FavoriteNotFoundException;
 import com.kodilla.currency.mapper.FavoriteMapper;
 import com.kodilla.currency.service.FavoriteService;
@@ -24,7 +25,7 @@ public class FavoriteFacade {
         return favoriteMapper.mapToFavoriteDto(favoriteService.getFavorite(favoriteId));
     }
 
-    public FavoriteDto saveSingleFavorite(final FavoriteDto favoriteDto) {
+    public FavoriteDto saveSingleFavorite(final FavoriteDto favoriteDto) throws DuplicateFavoriteException {
         return favoriteMapper.mapToFavoriteDto(favoriteService.saveFavorite(favoriteMapper.mapToFavorite(favoriteDto)));
     }
 

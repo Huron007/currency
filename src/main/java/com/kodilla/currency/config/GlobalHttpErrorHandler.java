@@ -1,9 +1,6 @@
 package com.kodilla.currency.config;
 
-import com.kodilla.currency.exception.AlertNotFoundException;
-import com.kodilla.currency.exception.CurrencyNotFoundException;
-import com.kodilla.currency.exception.DuplicateCurrencyException;
-import com.kodilla.currency.exception.FavoriteNotFoundException;
+import com.kodilla.currency.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,5 +28,10 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> handleFavoriteNotFoundException(FavoriteNotFoundException exception){
         return new ResponseEntity<>("Favorite with given id does not exist.", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleDuplicateFavoriteException(DuplicateFavoriteException exception){
+        return new ResponseEntity<>("Favorite with given properties already exist.", HttpStatus.BAD_REQUEST);
     }
 }

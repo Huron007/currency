@@ -1,6 +1,7 @@
 package com.kodilla.currency.controller;
 
 import com.kodilla.currency.dto.FavoriteDto;
+import com.kodilla.currency.exception.DuplicateFavoriteException;
 import com.kodilla.currency.exception.FavoriteNotFoundException;
 import com.kodilla.currency.facade.FavoriteFacade;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class FavoriteController {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FavoriteDto> createFavorite(@RequestBody FavoriteDto favoriteDto) {
+    public ResponseEntity<FavoriteDto> createFavorite(@RequestBody FavoriteDto favoriteDto) throws DuplicateFavoriteException {
         return ResponseEntity.ok(favoriteFacade.saveSingleFavorite(favoriteDto));
     }
 
