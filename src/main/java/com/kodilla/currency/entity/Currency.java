@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-@NamedQueries(
-        @NamedQuery(
-                name = "Currency.checkDuplicates",
-                query = "FROM Currency WHERE code = :CODE AND effectiveDate = :DATE"
-        )
+@NamedQuery(
+        name = "Currency.checkDuplicates",
+        query = "FROM Currency WHERE code = :CODE AND effectiveDate = :DATE"
 )
 @AllArgsConstructor
 @NoArgsConstructor

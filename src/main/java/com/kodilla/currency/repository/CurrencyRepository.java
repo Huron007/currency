@@ -31,5 +31,7 @@ public interface CurrencyRepository extends CrudRepository<Currency, Long> {
     @Query
     List<Currency> checkDuplicates(@Param("CODE") Code code, @Param("DATE") LocalDate date);
 
+    List<Currency> findByCode(Code code);
+
     Optional<Currency> findByEffectiveDate(LocalDate date);
 }
