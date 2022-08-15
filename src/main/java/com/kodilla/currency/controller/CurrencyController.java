@@ -20,6 +20,7 @@ public class CurrencyController {
 
     private final CurrencyFacade currencyFacade;
 
+    //DATABASE OPERATIONS
     @GetMapping
     public ResponseEntity<List<CurrencyDto>> getCurrencies() {
         return ResponseEntity.ok(currencyFacade.getAllCurrencies());
@@ -56,7 +57,7 @@ public class CurrencyController {
         return ResponseEntity.ok(currencyFacade.updateCurrencyTable(currencyDtoList));
     }
 
-    //WILL BE MOVED TO SCHEDULER
+    //API OPERATIONS
     @GetMapping(value = "fetch/{code}")
     public ResponseEntity<CurrencyDto> fetchSingleCurrency(@PathVariable Code code) throws DuplicateCurrencyException {
         return ResponseEntity.ok(currencyFacade.fetchSingleCurrency(code));

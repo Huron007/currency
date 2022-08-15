@@ -21,6 +21,16 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler
+    public ResponseEntity<Object> handleCryptoCurrencyNotFoundException(CryptoCurrencyNotFoundException exception){
+        return new ResponseEntity<>("CryptoCurrency with given id does not exist.", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleDuplicateCryptoCurrencyException(DuplicateCryptoCurrencyException exception){
+        return new ResponseEntity<>("CryptoCurrency with given code and effective date already exist in database.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
     public ResponseEntity<Object> handleAlertNotFoundException(AlertNotFoundException exception){
         return new ResponseEntity<>("Alert with given id does not exist." , HttpStatus.NOT_FOUND);
     }
