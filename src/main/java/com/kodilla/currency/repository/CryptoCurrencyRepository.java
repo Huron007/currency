@@ -25,7 +25,7 @@ public interface CryptoCurrencyRepository extends CrudRepository<CryptoCurrency,
     void deleteById(Long id);
 
     @Query
-    List<CryptoCurrency> checkDuplicates(@Param("CODE") Code code, @Param("DATE") LocalDate date);
+    List<CryptoCurrency> checkDuplicates(@Param("NAME") String name, @Param("DATE") LocalDate date);
 
     List<CryptoCurrency> findByCode(Code code);
 

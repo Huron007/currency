@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @NamedQuery(
         name = "CryptoCurrency.checkDuplicates",
-        query = "FROM Currency WHERE code = :CODE AND effectiveDate = :DATE"
+        query = "FROM CryptoCurrency WHERE name = :NAME AND effectiveDate = :DATE"
 )
 @AllArgsConstructor
 @NoArgsConstructor

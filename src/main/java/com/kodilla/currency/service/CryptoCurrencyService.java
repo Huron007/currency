@@ -30,14 +30,14 @@ public class CryptoCurrencyService {
     }
 
     public CryptoCurrency saveCryptoCurrency(final CryptoCurrency cryptoCryptoCurrency) throws DuplicateCryptoCurrencyException {
-        if(cryptoCryptoCurrencyRepository.checkDuplicates(cryptoCryptoCurrency.getCode(), cryptoCryptoCurrency.getEffectiveDate()).isEmpty()){
+        if(cryptoCryptoCurrencyRepository.checkDuplicates(cryptoCryptoCurrency.getName(), cryptoCryptoCurrency.getEffectiveDate()).isEmpty()){
             return cryptoCryptoCurrencyRepository.save(cryptoCryptoCurrency);
         } else throw new DuplicateCryptoCurrencyException();
     }
 
     public List<CryptoCurrency> saveCryptoCurrencyList(final List<CryptoCurrency> cryptoCryptoCurrencyList){
         return cryptoCryptoCurrencyList.stream()
-                .filter(Predicate.not(e -> cryptoCryptoCurrencyRepository.checkDuplicates(e.getCode(), e.getEffectiveDate()).stream().anyMatch(a -> a.getCode().equals(e.getCode()) && a.getEffectiveDate().equals(e.getEffectiveDate()))))
+                .filter(Predicate.not(e -> cryptoCryptoCurrencyRepository.checkDuplicates(e.getName(), e.getEffectiveDate()).stream().anyMatch(a -> a.getName().equals(e.getName()) && a.getEffectiveDate().equals(e.getEffectiveDate()))))
                 .map(cryptoCryptoCurrencyRepository::save)
                 .collect(Collectors.toList());
     }

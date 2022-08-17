@@ -1,6 +1,7 @@
 package com.kodilla.currency.controller;
 
 import com.kodilla.currency.dto.CryptoCurrencyDto;
+import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.facade.CryptoCurrencyFacade;
@@ -54,5 +55,16 @@ public class CryptoCurrencyController {
     @PostMapping(value = "Table", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CryptoCurrencyDto>> updateTable(@RequestBody List<CryptoCurrencyDto> cryptoCryptoCurrencyDtoList) throws CryptoCurrencyNotFoundException {
         return ResponseEntity.ok(cryptoCurrencyFacade.updateCryptoCurrencyTable(cryptoCryptoCurrencyDtoList));
+    }
+
+    //API OPERATIONS
+    @GetMapping(value = "fetch/topTen")
+    public ResponseEntity<List<CryptoCurrencyDto>> fetchTopTenCrypto(){
+        return ResponseEntity.ok(cryptoCurrencyFacade.fetchTopTenCryptoList());
+    }
+
+    @GetMapping(value = "fetch/{code}")
+    public ResponseEntity<List<CryptoCurrencyDto>> fetchCryptoFromWholeMonth(@PathVariable Code code){
+        return ResponseEntity.ok(cryptoCurrencyFacade.fetchSingleCryptoFromWholeMonth(code));
     }
 }

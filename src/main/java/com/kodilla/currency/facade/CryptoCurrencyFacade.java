@@ -1,6 +1,11 @@
 package com.kodilla.currency.facade;
 
+import com.kodilla.currency.client.CoinGeckoClient;
 import com.kodilla.currency.dto.CryptoCurrencyDto;
+import com.kodilla.currency.dto.CurrencyDto;
+import com.kodilla.currency.entity.Code;
+import com.kodilla.currency.entity.CryptoCurrency;
+import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.mapper.CryptoCurrencyMapper;
@@ -16,6 +21,20 @@ public class CryptoCurrencyFacade {
 
     private final CryptoCurrencyMapper cryptoCurrencyMapper;
     private final CryptoCurrencyService cryptoCurrencyService;
+    private final CoinGeckoClient coinGeckoClient;
+
+    //Operations on Coin Gecko API
+    public List<CryptoCurrencyDto> fetchTopTenCryptoList() {
+        List<CryptoCurrency> currencyList = cryptoCurrencyMapper.mapToCryptoCurrencyList(coinGeckoClient.getTopTenCrypto());
+        List<CryptoCurrency> savedList = cryptoCurrencyService.saveCryptoCurrencyList(currencyList);
+        return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(savedList);
+    }
+
+    public List<CryptoCurrencyDto> fetchSingleCryptoFromWholeMonth(Code code) {
+        List<CryptoCurrency> currencyList = cryptoCurrencyMapper.mapToCryptoCurrencyList(coinGeckoClient.getSingleCryptoFromWholeMonth(code));
+        List<CryptoCurrency> savedList = cryptoCurrencyService.saveCryptoCurrencyList(currencyList);
+        return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(savedList);
+    }
 
     //Operations on database
     public List<CryptoCurrencyDto> getAllCurrencies(){
