@@ -1,5 +1,6 @@
 package com.kodilla.currency.service;
 
+import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCurrencyException;
@@ -7,6 +8,7 @@ import com.kodilla.currency.repository.CurrencyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -19,6 +21,22 @@ public class CurrencyService {
 
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
+    }
+
+    public List<Currency> getAllCurrenciesWithGivenCode(Code code) throws CurrencyNotFoundException{
+        if(!currencyRepository.findByCode(code).isEmpty()){
+            return currencyRepository.findByCode(code);
+        } else throw new CurrencyNotFoundException();
+    }
+
+    public List<Currency> getLatestCurrencyList(){
+        LocalDate date = LocalDate.now();
+        List<Currency> list = currencyRepository.findByEffectiveDate(date);
+        while (list.isEmpty()){
+            date = date.minusDays(1);
+            list = currencyRepository.findByEffectiveDate(date);
+        }
+        return list;
     }
 
     public Currency getCurrency(final Long currencyId) throws CurrencyNotFoundException {

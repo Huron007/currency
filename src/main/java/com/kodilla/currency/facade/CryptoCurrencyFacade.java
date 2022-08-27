@@ -41,6 +41,10 @@ public class CryptoCurrencyFacade {
         return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(cryptoCurrencyService.getAllCurrencies());
     }
 
+    public List<CryptoCurrencyDto> getLatestCryptoCurrencyList(){
+        return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(cryptoCurrencyService.getLatestCryptoCurrencyList());
+    }
+
     public CryptoCurrencyDto getSingleCryptoCurrency(final Long cryptoCurrencyId) throws CryptoCurrencyNotFoundException {
         return cryptoCurrencyMapper.mapToCryptoCurrencyDto(cryptoCurrencyService.getCryptoCurrency(cryptoCurrencyId));
     }

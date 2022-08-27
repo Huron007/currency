@@ -33,5 +33,5 @@ public interface CurrencyRepository extends CrudRepository<Currency, Long> {
 
     List<Currency> findByCode(Code code);
 
-    Optional<Currency> findByEffectiveDate(LocalDate date);
+    List<Currency> findByEffectiveDate(LocalDate date);
 }

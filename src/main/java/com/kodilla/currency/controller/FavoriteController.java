@@ -35,22 +35,22 @@ public class FavoriteController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FavoriteDto> createFavorite(@RequestBody FavoriteDto favoriteDto) throws DuplicateFavoriteException {
         return ResponseEntity.ok(favoriteFacade.saveSingleFavorite(favoriteDto));
     }
 
-    @PutMapping(value = "FavoriteList",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "FavoriteList",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FavoriteDto>> createFavoriteList(@RequestBody List<FavoriteDto> favoriteDtoList) {
         return ResponseEntity.ok(favoriteFacade.saveFavoriteList(favoriteDtoList));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FavoriteDto> updateFavorite(@RequestBody FavoriteDto favoriteDto) throws FavoriteNotFoundException {
         return ResponseEntity.ok(favoriteFacade.updateSingleFavorite(favoriteDto));
     }
 
-    @PostMapping(value = "FavoriteList", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "FavoriteList", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FavoriteDto>> updateFavoriteList(@RequestBody List<FavoriteDto> favoriteDtoList) throws FavoriteNotFoundException {
         return ResponseEntity.ok(favoriteFacade.updateFavoriteList(favoriteDtoList));
     }

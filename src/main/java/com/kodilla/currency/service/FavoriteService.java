@@ -32,7 +32,7 @@ public class FavoriteService {
     public Favorite saveFavorite(final Favorite favorite) throws DuplicateFavoriteException {
         if(favoriteRepository.existsById(favorite.getId())){
             throw new DuplicateFavoriteException();
-        } else if(favoriteRepository.findDuplicates(favorite.getName(), favorite.getCode()).isEmpty()){
+        } else if(favoriteRepository.findByCode(favorite.getCode()).isEmpty()){
             return favoriteRepository.save(favorite);
         } else throw new DuplicateFavoriteException();
     }

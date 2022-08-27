@@ -26,9 +26,24 @@ public class CurrencyController {
         return ResponseEntity.ok(currencyFacade.getAllCurrencies());
     }
 
+    @GetMapping("list/{code}")
+    public ResponseEntity<List<CurrencyDto>> getAllCurrenciesWithGivenCode(@PathVariable Code code) throws CurrencyNotFoundException {
+        return ResponseEntity.ok(currencyFacade.getAllCurrenciesWithGivenCode(code));
+    }
+
+    @GetMapping("list/latest")
+    public ResponseEntity<List<CurrencyDto>> getLatestCurrencyList(){
+        return ResponseEntity.ok(currencyFacade.getLatestCurrencyList());
+    }
+
     @GetMapping(value = "{currencyId}")
     public ResponseEntity<CurrencyDto> getCurrency(@PathVariable Long currencyId) throws CurrencyNotFoundException {
         return ResponseEntity.ok(currencyFacade.getSingleCurrency(currencyId));
+    }
+
+    @GetMapping(value = "/rate/{code}")
+    public ResponseEntity<Double> getLatestExchangeRate(@PathVariable Code code){
+        return ResponseEntity.ok(currencyFacade.getLatestExchangeRate(code));
     }
 
     @DeleteMapping(value = "{currencyId}")
@@ -37,22 +52,22 @@ public class CurrencyController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CurrencyDto> createCurrency(@RequestBody CurrencyDto currencyDto) throws DuplicateCurrencyException {
         return ResponseEntity.ok(currencyFacade.saveSingleCurrency(currencyDto));
     }
 
-    @PutMapping(value = "Table",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "Table",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CurrencyDto>> createCurrencyTable(@RequestBody List<CurrencyDto> currencyDtoList) {
         return ResponseEntity.ok(currencyFacade.saveCurrencyTable(currencyDtoList));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CurrencyDto> updateCurrency(@RequestBody CurrencyDto currencyDto) throws CurrencyNotFoundException {
         return ResponseEntity.ok(currencyFacade.updateSingleCurrency(currencyDto));
     }
 
-    @PostMapping(value = "Table", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "Table", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CurrencyDto>> updateTable(@RequestBody List<CurrencyDto> currencyDtoList) throws CurrencyNotFoundException {
         return ResponseEntity.ok(currencyFacade.updateCurrencyTable(currencyDtoList));
     }

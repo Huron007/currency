@@ -14,13 +14,13 @@ public class FavoriteMapper {
         if(favoriteDto.getId() == null){
             return Favorite.builder()
                     .id(0L)
-                    .name(favoriteDto.getName())
+                    .name(favoriteDto.getCode().name)
                     .code(favoriteDto.getCode())
                     .build();
         } else {
             return Favorite.builder()
                     .id(favoriteDto.getId())
-                    .name(favoriteDto.getName())
+                    .name(favoriteDto.getCode().name)
                     .code(favoriteDto.getCode())
                     .build();
         }

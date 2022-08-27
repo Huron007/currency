@@ -1,12 +1,14 @@
 package com.kodilla.currency.service;
 
 import com.kodilla.currency.entity.CryptoCurrency;
+import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.repository.CryptoCurrencyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -19,6 +21,16 @@ public class CryptoCurrencyService {
 
     public List<CryptoCurrency> getAllCurrencies() {
         return cryptoCryptoCurrencyRepository.findAll();
+    }
+
+    public List<CryptoCurrency> getLatestCryptoCurrencyList(){
+        LocalDate date = LocalDate.now();
+        List<CryptoCurrency> list = cryptoCryptoCurrencyRepository.findByEffectiveDate(date);
+        while (list.isEmpty()){
+            date = date.minusDays(1);
+            list = cryptoCryptoCurrencyRepository.findByEffectiveDate(date);
+        }
+        return list;
     }
 
     public CryptoCurrency getCryptoCurrency(final Long cryptoCryptoCurrencyId) throws CryptoCurrencyNotFoundException {

@@ -34,22 +34,22 @@ public class AlertController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AlertDto> createAlert(@RequestBody AlertDto alertDto) {
         return ResponseEntity.ok(alertFacade.saveSingleAlert(alertDto));
     }
 
-    @PutMapping(value = "AlertList",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "AlertList",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AlertDto>> createAlertList(@RequestBody List<AlertDto> alertDtoList) {
         return ResponseEntity.ok(alertFacade.saveAlertList(alertDtoList));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AlertDto> updateAlert(@RequestBody AlertDto alertDto) throws AlertNotFoundException {
         return ResponseEntity.ok(alertFacade.updateSingleAlert(alertDto));
     }
 
-    @PostMapping(value = "AlertList", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "AlertList", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AlertDto>> updateAlertList(@RequestBody List<AlertDto> alertDtoList) throws AlertNotFoundException {
         return ResponseEntity.ok(alertFacade.updateAlertList(alertDtoList));
     }

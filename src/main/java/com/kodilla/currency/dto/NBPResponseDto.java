@@ -1,4 +1,4 @@
-package com.kodilla.currency.domain;
+package com.kodilla.currency.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TableRates {
+public class NBPResponseDto {
     @JsonProperty("currency")
     private String currency;
     @JsonProperty("code")
     private Code code;
-    @JsonProperty("mid")
-    private Double exchangeRate;
+    @JsonProperty("rates")
+    private Rates[] rates;
 }

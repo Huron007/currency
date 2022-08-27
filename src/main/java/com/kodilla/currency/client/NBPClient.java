@@ -2,8 +2,8 @@ package com.kodilla.currency.client;
 
 import com.kodilla.currency.config.NBPConfig;
 import com.kodilla.currency.domain.NBPResponseConverter;
-import com.kodilla.currency.domain.NBPResponseDto;
-import com.kodilla.currency.domain.NBPResponseTableDto;
+import com.kodilla.currency.dto.NBPResponseDto;
+import com.kodilla.currency.dto.NBPResponseTableDto;
 import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
 import lombok.RequiredArgsConstructor;

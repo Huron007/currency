@@ -1,9 +1,9 @@
 package com.kodilla.currency.client;
 
 import com.kodilla.currency.config.CoinGeckoConfig;
-import com.kodilla.currency.domain.CoinGeckoApiResponseDto;
+import com.kodilla.currency.dto.CoinGeckoApiResponseDto;
 import com.kodilla.currency.domain.CoinGeckoResponseConverter;
-import com.kodilla.currency.domain.CoinGeckoResponseWithSpecifiedDateDto;
+import com.kodilla.currency.dto.CoinGeckoResponseWithSpecifiedDateDto;
 import com.kodilla.currency.dto.CryptoCurrencyDto;
 import com.kodilla.currency.entity.Code;
 import lombok.RequiredArgsConstructor;

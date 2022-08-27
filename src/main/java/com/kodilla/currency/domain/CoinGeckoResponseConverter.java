@@ -1,5 +1,7 @@
 package com.kodilla.currency.domain;
 
+import com.kodilla.currency.dto.CoinGeckoApiResponseDto;
+import com.kodilla.currency.dto.CoinGeckoResponseWithSpecifiedDateDto;
 import com.kodilla.currency.dto.CryptoCurrencyDto;
 import com.kodilla.currency.entity.Code;
 import lombok.RequiredArgsConstructor;

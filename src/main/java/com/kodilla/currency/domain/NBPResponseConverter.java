@@ -1,10 +1,11 @@
 package com.kodilla.currency.domain;
 
 import com.kodilla.currency.dto.CurrencyDto;
+import com.kodilla.currency.dto.NBPResponseDto;
+import com.kodilla.currency.dto.NBPResponseTableDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Component

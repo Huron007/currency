@@ -1,4 +1,4 @@
-package com.kodilla.currency.domain;
+package com.kodilla.currency.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Rates {
+public class NBPResponseTableDto {
     @JsonProperty("effectiveDate")
     private LocalDate effectiveDate;
-    @JsonProperty("mid")
-    private Double exchangeRate;
+    @JsonProperty("rates")
+    private TableRates[] rates;
 }

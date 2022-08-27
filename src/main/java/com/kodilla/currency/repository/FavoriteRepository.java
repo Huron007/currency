@@ -29,4 +29,6 @@ public interface FavoriteRepository extends CrudRepository<Favorite, Long> {
 
     @Query
     List<Favorite> findDuplicates(@Param("NAME") String name, @Param("CODE") Code code);
+
+    List<Favorite> findByCode(Code code);
 }

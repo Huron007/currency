@@ -1,6 +1,7 @@
 package com.kodilla.currency.controller;
 
 import com.kodilla.currency.dto.CryptoCurrencyDto;
+import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
@@ -26,6 +27,11 @@ public class CryptoCurrencyController {
         return ResponseEntity.ok(cryptoCurrencyFacade.getAllCurrencies());
     }
 
+    @GetMapping("list/latest")
+    public ResponseEntity<List<CryptoCurrencyDto>> getLatestCurrencyList(){
+        return ResponseEntity.ok(cryptoCurrencyFacade.getLatestCryptoCurrencyList());
+    }
+
     @GetMapping(value = "{cryptoCryptoCurrencyId}")
     public ResponseEntity<CryptoCurrencyDto> getCryptoCurrency(@PathVariable Long cryptoCryptoCurrencyId) throws CryptoCurrencyNotFoundException {
         return ResponseEntity.ok(cryptoCurrencyFacade.getSingleCryptoCurrency(cryptoCryptoCurrencyId));
@@ -37,22 +43,22 @@ public class CryptoCurrencyController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CryptoCurrencyDto> createCryptoCurrency(@RequestBody CryptoCurrencyDto cryptoCryptoCurrencyDto) throws DuplicateCryptoCurrencyException {
         return ResponseEntity.ok(cryptoCurrencyFacade.saveSingleCryptoCurrency(cryptoCryptoCurrencyDto));
     }
 
-    @PutMapping(value = "Table",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "Table",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CryptoCurrencyDto>> createCryptoCurrencyTable(@RequestBody List<CryptoCurrencyDto> cryptoCryptoCurrencyDtoList) {
         return ResponseEntity.ok(cryptoCurrencyFacade.saveCryptoCurrencyTable(cryptoCryptoCurrencyDtoList));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CryptoCurrencyDto> updateCryptoCurrency(@RequestBody CryptoCurrencyDto cryptoCryptoCurrencyDto) throws CryptoCurrencyNotFoundException {
         return ResponseEntity.ok(cryptoCurrencyFacade.updateSingleCryptoCurrency(cryptoCryptoCurrencyDto));
     }
 
-    @PostMapping(value = "Table", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "Table", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CryptoCurrencyDto>> updateTable(@RequestBody List<CryptoCurrencyDto> cryptoCryptoCurrencyDtoList) throws CryptoCurrencyNotFoundException {
         return ResponseEntity.ok(cryptoCurrencyFacade.updateCryptoCurrencyTable(cryptoCryptoCurrencyDtoList));
     }

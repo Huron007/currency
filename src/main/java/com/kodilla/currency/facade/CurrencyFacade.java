@@ -1,5 +1,6 @@
 package com.kodilla.currency.facade;
 
+import com.kodilla.currency.client.CurrencyCalculator;
 import com.kodilla.currency.client.NBPClient;
 import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
@@ -20,6 +21,7 @@ public class CurrencyFacade {
     private final NBPClient nbpClient;
     private final CurrencyMapper currencyMapper;
     private final CurrencyService currencyService;
+    private final CurrencyCalculator calculator;
 
     //Operations on NBP API
     public List<CurrencyDto> fetchCurrencyList() {
@@ -51,6 +53,14 @@ public class CurrencyFacade {
         return currencyMapper.mapToCurrencyListDto(currencyService.getAllCurrencies());
     }
 
+    public List<CurrencyDto> getAllCurrenciesWithGivenCode(final Code code) throws CurrencyNotFoundException {
+        return currencyMapper.mapToCurrencyListDto(currencyService.getAllCurrenciesWithGivenCode(code));
+    }
+
+    public List<CurrencyDto> getLatestCurrencyList(){
+        return currencyMapper.mapToCurrencyListDto(currencyService.getLatestCurrencyList());
+    }
+
     public CurrencyDto getSingleCurrency(final Long currencyId) throws CurrencyNotFoundException {
         return currencyMapper.mapToCurrencyDto(currencyService.getCurrency(currencyId));
     }
@@ -73,5 +83,9 @@ public class CurrencyFacade {
 
     public void deleteCurrency(final Long currencyId) throws CurrencyNotFoundException {
         currencyService.deleteCurrency(currencyId);
+    }
+
+    public Double getLatestExchangeRate(Code code){
+        return calculator.getLatestExchangeRate(code);
     }
 }

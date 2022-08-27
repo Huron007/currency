@@ -1,5 +1,6 @@
 package com.kodilla.currency.entity;
 
+import jdk.jfr.Name;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
