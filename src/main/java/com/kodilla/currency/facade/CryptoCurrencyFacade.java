@@ -7,6 +7,7 @@ import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.entity.CryptoCurrency;
 import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
+import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.mapper.CryptoCurrencyMapper;
 import com.kodilla.currency.service.CryptoCurrencyService;
@@ -39,6 +40,10 @@ public class CryptoCurrencyFacade {
     //Operations on database
     public List<CryptoCurrencyDto> getAllCurrencies(){
         return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(cryptoCurrencyService.getAllCurrencies());
+    }
+
+    public List<CryptoCurrencyDto> getAllCryptoCurrenciesWithGivenCode(final Code code) throws CryptoCurrencyNotFoundException {
+        return cryptoCurrencyMapper.mapToCryptoCurrencyListDto(cryptoCurrencyService.getAllCryptoCurrenciesWithGivenCode(code));
     }
 
     public List<CryptoCurrencyDto> getLatestCryptoCurrencyList(){

@@ -5,6 +5,7 @@ import com.kodilla.currency.client.NBPClient;
 import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.entity.Currency;
+import com.kodilla.currency.exception.CodeNotFoundException;
 import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCurrencyException;
 import com.kodilla.currency.mapper.CurrencyMapper;
@@ -85,7 +86,11 @@ public class CurrencyFacade {
         currencyService.deleteCurrency(currencyId);
     }
 
-    public Double getLatestExchangeRate(Code code){
+    public Double getLatestExchangeRate(Code code) throws CodeNotFoundException {
         return calculator.getLatestExchangeRate(code);
+    }
+
+    public Double calculate(Code code1, Code code2, Double value) throws CodeNotFoundException {
+        return calculator.calculateCurrency(code1, code2, value);
     }
 }

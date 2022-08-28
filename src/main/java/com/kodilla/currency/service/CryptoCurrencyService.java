@@ -1,8 +1,10 @@
 package com.kodilla.currency.service;
 
+import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.entity.CryptoCurrency;
 import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
+import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.repository.CryptoCurrencyRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,12 @@ public class CryptoCurrencyService {
 
     public List<CryptoCurrency> getAllCurrencies() {
         return cryptoCryptoCurrencyRepository.findAll();
+    }
+
+    public List<CryptoCurrency> getAllCryptoCurrenciesWithGivenCode(Code code) throws CryptoCurrencyNotFoundException {
+        if(!cryptoCryptoCurrencyRepository.findByCode(code).isEmpty()){
+            return cryptoCryptoCurrencyRepository.findByCode(code);
+        } else throw new CryptoCurrencyNotFoundException();
     }
 
     public List<CryptoCurrency> getLatestCryptoCurrencyList(){

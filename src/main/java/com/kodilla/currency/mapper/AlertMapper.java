@@ -14,7 +14,7 @@ public class AlertMapper {
         if(alertDto.getId() == null){
             return Alert.builder()
                     .id(0L)
-                    .name(alertDto.getName())
+                    .name(alertDto.getCode().name)
                     .code(alertDto.getCode())
                     .trackedMargin(alertDto.getTrackedMargin())
                     .creationDate(alertDto.getCreationDate())
@@ -23,7 +23,7 @@ public class AlertMapper {
         } else {
             return Alert.builder()
                     .id(alertDto.getId())
-                    .name(alertDto.getName())
+                    .name(alertDto.getCode().name)
                     .code(alertDto.getCode())
                     .trackedMargin(alertDto.getTrackedMargin())
                     .creationDate(alertDto.getCreationDate())

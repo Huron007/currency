@@ -2,6 +2,7 @@ package com.kodilla.currency.scheduler;
 
 import com.kodilla.currency.client.CurrencyCalculator;
 import com.kodilla.currency.entity.Alert;
+import com.kodilla.currency.exception.CodeNotFoundException;
 import com.kodilla.currency.repository.AlertRepository;
 import com.kodilla.currency.repository.CurrencyRepository;
 import com.kodilla.currency.service.EmailService;
@@ -24,7 +25,14 @@ public class AlertScheduler {
     public void executeAlerts() {
         List<Alert> alertList = alertRepository.findAll().stream()
                 .filter(Alert::isActive)
-                .filter(e -> currencyCalculator.getLatestExchangeRate(e.getCode()) >= e.getTrackedMargin())
+                .filter(e -> {
+                    try {
+                        return currencyCalculator.getLatestExchangeRate(e.getCode()) >= e.getTrackedMargin();
+                    } catch (CodeNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                    return false;
+                })
                 .collect(Collectors.toList());
 
         for (Alert alert : alertList) {

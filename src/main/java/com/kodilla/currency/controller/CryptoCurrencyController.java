@@ -4,6 +4,7 @@ import com.kodilla.currency.dto.CryptoCurrencyDto;
 import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
+import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.facade.CryptoCurrencyFacade;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,11 @@ public class CryptoCurrencyController {
     @GetMapping
     public ResponseEntity<List<CryptoCurrencyDto>> getCurrencies() {
         return ResponseEntity.ok(cryptoCurrencyFacade.getAllCurrencies());
+    }
+
+    @GetMapping("list/{code}")
+    public ResponseEntity<List<CryptoCurrencyDto>> getAllCurrenciesWithGivenCode(@PathVariable Code code) throws CryptoCurrencyNotFoundException {
+        return ResponseEntity.ok(cryptoCurrencyFacade.getAllCryptoCurrenciesWithGivenCode(code));
     }
 
     @GetMapping("list/latest")

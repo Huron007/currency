@@ -44,4 +44,9 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleDuplicateFavoriteException(DuplicateFavoriteException exception){
         return new ResponseEntity<>("Favorite with given properties already exist.", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleCodeNotFoundException(CodeNotFoundException exception){
+        return new ResponseEntity<>("Given code does not exist.", HttpStatus.NOT_FOUND);
+    }
 }

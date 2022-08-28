@@ -2,6 +2,7 @@ package com.kodilla.currency.controller;
 
 import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
+import com.kodilla.currency.exception.CodeNotFoundException;
 import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCurrencyException;
 import com.kodilla.currency.facade.CurrencyFacade;
@@ -42,8 +43,13 @@ public class CurrencyController {
     }
 
     @GetMapping(value = "/rate/{code}")
-    public ResponseEntity<Double> getLatestExchangeRate(@PathVariable Code code){
+    public ResponseEntity<Double> getLatestExchangeRate(@PathVariable Code code) throws CodeNotFoundException {
         return ResponseEntity.ok(currencyFacade.getLatestExchangeRate(code));
+    }
+
+    @GetMapping(value = "/calculate")
+    public ResponseEntity<Double> calculate(@RequestParam Code code1, @RequestParam Code code2, @RequestParam Double value) throws CodeNotFoundException {
+        return ResponseEntity.ok(currencyFacade.calculate(code1, code2, value));
     }
 
     @DeleteMapping(value = "{currencyId}")
