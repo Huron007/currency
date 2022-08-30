@@ -2,12 +2,9 @@ package com.kodilla.currency.facade;
 
 import com.kodilla.currency.client.CoinGeckoClient;
 import com.kodilla.currency.dto.CryptoCurrencyDto;
-import com.kodilla.currency.dto.CurrencyDto;
 import com.kodilla.currency.entity.Code;
 import com.kodilla.currency.entity.CryptoCurrency;
-import com.kodilla.currency.entity.Currency;
 import com.kodilla.currency.exception.CryptoCurrencyNotFoundException;
-import com.kodilla.currency.exception.CurrencyNotFoundException;
 import com.kodilla.currency.exception.DuplicateCryptoCurrencyException;
 import com.kodilla.currency.mapper.CryptoCurrencyMapper;
 import com.kodilla.currency.service.CryptoCurrencyService;

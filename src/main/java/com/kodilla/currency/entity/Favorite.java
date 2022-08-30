@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @NamedQuery(
         name = "Favorite.findDuplicates",
@@ -28,4 +29,17 @@ public class Favorite {
 
     @Column(unique = true)
     private Code code;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Favorite favorite = (Favorite) o;
+        return Objects.equals(id, favorite.id) && Objects.equals(name, favorite.name) && code == favorite.code;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, code);
+    }
 }

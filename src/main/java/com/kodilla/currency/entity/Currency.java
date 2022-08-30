@@ -1,13 +1,12 @@
 package com.kodilla.currency.entity;
 
-import jdk.jfr.Name;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
+
 @NamedQuery(
         name = "Currency.checkDuplicates",
         query = "FROM Currency WHERE code = :CODE AND effectiveDate = :DATE"
@@ -33,4 +32,17 @@ public class Currency {
     private LocalDate effectiveDate;
 
     private Double exchangeRate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Currency currency = (Currency) o;
+        return Objects.equals(id, currency.id) && Objects.equals(name, currency.name) && code == currency.code && Objects.equals(effectiveDate, currency.effectiveDate) && Objects.equals(exchangeRate, currency.exchangeRate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, code, effectiveDate, exchangeRate);
+    }
 }

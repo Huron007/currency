@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @NamedQuery(
         name = "CryptoCurrency.checkDuplicates",
@@ -33,4 +34,17 @@ public class CryptoCurrency {
     private LocalDate effectiveDate;
 
     private Double exchangeRate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CryptoCurrency that = (CryptoCurrency) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && code == that.code && Objects.equals(effectiveDate, that.effectiveDate) && Objects.equals(exchangeRate, that.exchangeRate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, code, effectiveDate, exchangeRate);
+    }
 }
